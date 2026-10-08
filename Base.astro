@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string }
+const { title, description = 'Przemyślenia o życiu, pieniądzach, zdrowiu i świecie wokół. Bez owijania w bawełnę.' } = Astro.props;
+const fullTitle = title ? `${title} | LatteMachete` : 'LatteMachete';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="mark" href="/">LatteMachete</a>
+      <nav aria-label="Główna nawigacja"><a href="/#blog">Blog</a><a href="/#o-mnie">O mnie</a></nav>
+    </header>
+    <slot />
+    <footer>© {new Date().getFullYear()} LatteMachete</footer>
+  </div>
+</body>
+</html>
